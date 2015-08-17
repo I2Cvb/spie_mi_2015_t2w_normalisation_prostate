@@ -38,28 +38,28 @@
 
 \begin{abstract}
 \acresetall  % reset the acronyms from the title (if any)
-Malignant melanoma is the most dangerous type of skin cancer, yet it is the most treatable kind of cancer, conditioned by its early diagnosis which is a challenging task for clinicians and dermatologists.
-In this regard, CAD systems based on machine learning and image processing techniques are developed to differentiate melanoma lesions from benign and dysplastic nevi using dermoscopic images. 
-Generally, these frameworks are composed of sequential processes: pre-processing, segmentation, and classification. 
-This architecture faces mainly two challenges: (i) each process is complex with the need to tune a set of parameters, and is specific to a given dataset; (ii) the performance of each process depends on the previous one, and the errors are accumulated throughout the framework. 
-In this paper, we propose a framework for melanoma classification based on sparse coding which does not rely on any pre-processing or lesion segmentation.
-Our framework uses Random Forests classifier and sparse representation of three features: SIFT, Hue and Opponent angle histograms, and RGB intensities. 
-The experiments are carried out on the public $PH^{2}$ dataset using a 10-fold cross-validation.
-The results show that SIFT sparse-coded feature achieves the highest performance with sensitivity and specificity of 100\% and 90.3\% respectively, with a dictionary size of 800 atoms and a sparsity level of 2. 
-Furthermore, the descriptor based on RGB intensities achieves similar results with sensitivity and specificity of 100\% and 71.3\%, respectively for a smaller dictionary size of 100 atoms. 
-In conclusion, dictionary learning techniques encode strong structures of dermoscopic images and provide discriminant descriptors.
+Prostate cancer is reported to be the second most frequently diagnosed cancer of men in the world. 
+In practise, diagnosis can be affected by multiple factors which reduces the chance to detect the potential lesions.
+In the last decades, new imaging techniques mainly based on MRI are developed in conjunction with \ac{cad} systems to help radiologists for such diagnosis.
+\Ac{cad} systems are usually designed as a sequential process consisting of four stages: pre-processing, segmentation, registration and classification.
+As a pre-processing, image normalization remains an important process to later design robust classifier and overcome the intensity variations inter-patients.
+However, little attention has been dedicated to the normalization of T2W-MRI prostate images.
+In this paper, we propose a method based on a Rician \textit{a priori} in order to normalize T2W-MRI prostate images.
+A comparison with the state-of-the-art methods is also provided.
+The normalization of the data is assessed by comparing the alignment of the patient \ac{pdf}s in both qualitative and quantitative manners.
+In both evaluation, the normalization using Rician \textit{a priori} outperforms the other state-of-the-art methods.
 \end{abstract}
 
-\keywords{Melanoma, Classification, Sparse coding, Random forests, Dermoscopy}
+\keywords{Prostate cancer, T2W MRI, Normalisation, pre-processing, computer-aided diagnosis}
 
 
 %% Incldue the content without .tex extension
 \acresetall  % reset the acronyms from the abstract
-\include*{content/intro/description} 
-\include*{content/method/method}
-\include*{content/results/experiments}
-\include*{content/results/results}
-\include*{content/conclusion/conclusion}
+% \include*{content/intro/description} 
+% \include*{content/method/method}
+% \include*{content/results/experiments}
+% \include*{content/results/results}
+% \include*{content/conclusion/conclusion}
          % the file wihtout .tex
 %\include*{content/other/other}
 %
