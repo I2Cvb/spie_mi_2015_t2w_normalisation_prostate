@@ -1,0 +1,11 @@
+\section{Experiments}
+\label{sec:exp}
+The experiments are conducted on the public $PH^2$ dataset which is acquired at \textit{Dermatology Service of Hospital Pedro Hispano, Matosinhos, Portugal}. 
+The dataset contains 200 dermoscopic images divided into two classes: (i) 160 benign and dysplastic, and (ii) 40 melanoma lesions. 
+Seven images have been discarded due to artefacts such as hair occlusions; thus, our experiments are conducted on a subset of the dataset consisting of 39 melanoma, 78 benign, and 76 dysplastic lesions.
+The patch size used to extract the feature is $\SI{10}{px} \times \SI{10}{px}$.
+Similarly to [], the imbalanced issue of the dataset is tackled by over-sampling the samples of the minority class.
+New samples are generated to get a balance, set by randomly repeating original samples of the minority class with an additional Gaussian noise $\mathcal{N}(0, 0.0001)$.
+The three low-level features are sparsely encoded considering three sparsity levels $\lambda=\{2,4,8\}$ and different number of atoms $K = \{100, 200, \cdots, 1000\}$.
+The classification is performed using a \ac{rf} classifier with 1000 unpruned trees using gini criterion, in a 10-fold cross-validation model in which 80\% of the data is used for training and 20\% for testing. 
+ 

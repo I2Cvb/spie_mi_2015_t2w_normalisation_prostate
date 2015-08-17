@@ -1,0 +1,30 @@
+\section{Methodology}
+\label{sec:method}
+% include the figures path relative to the master file
+\graphicspath{ {./content/method/figures/} }
+As mentioned in the Sect.\,\ref{sec:descr}, the proposed framework do not rely on pre-processing an segmentation and focus only on feature detection, extraction and classification.
+\begin{description}
+\item[Feature detection] Low-level feature are used to encode the texture and color aspects of dermoscopic images. In this regard, \ac{sift} (named \emph{\ac{sift}}) and two color descriptors: the first color descriptor consists of Hue and opponent color space angle histogram (named \emph{C1}), and the second color descriptor is based on the concatenation of the R, G and B intensities (named \emph{C2}). All these features are extracted from local patches in the dermoscopic images.
+\item[Feature extraction] High-level descriptor is computed using sparse coding techniques. Sparse signal representation has become very popular in the past decades and lead to state-of-the-art results in various applications such as face recognition, image denoising, image inpainting, and image classification. The main goal of sparse modeling is to efficiently represent the images as linear combination of a few typical patterns, called atoms, selected from the dictionary. Here, we intend to use sparse representation of the low-level extracted features for melanoma classification. Sparse coding consists of three main steps: (i) dictionary learning, (ii) low-level features projection, and (iii) feature pooling. 
+
+The dictionary is learned using $K$-SVD which is a generalized version of $K$-means clustering and uses \ac{svd}. The dictionary is built such that:
+\begin{equation}
+  \argmin_{\mathbf{x}} \|\mathbf{y} - \mathbf{D}\mathbf{x}\|_{2} \qquad  \text{s.t.} \  \|\mathbf{x}\|_{1} \leq \lambda \,
+\end{equation}
+
+\noindent where $\mathbf{y}$ is a low-level descriptor, $\mathbf{x}$ is the sparse coded descriptor (i.e., high-level descriptor) with a sparsity level $\lambda$, and $\mathbf{D}$ is the dictionary with $K$ atoms.
+
+Once the dictionary is learned, each low-level extracted feature from a patch can be projected using $\mathbf{D}$ to form a set of sparse codes. This set is further max-pooled to built a final global descriptor to characterize the whole image.
+\item[Feature classification] The descriptor obtained after max-pooling is used to train and test a \ac{rf} classifier. 
+\end{description}
+
+\section{Contribution}
+We propose a classification framework which do not rely on pre-processing and lesion segmentation and is based on sparse coded features. It is also presented that low-level features such as intensity values can be used directly for classification of the lesions within such framework. 
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End: 

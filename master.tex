@@ -1,0 +1,74 @@
+%  article.tex (Version 3.3, released 19 January 2008)
+%  Article to demonstrate format for SPIE Proceedings
+%  Special instructions are included in this file after the
+%  symbol %>>>>
+%  Numerous commands are commented out, but included to show how
+%  to effect various options, e.g., to print page numbers, etc.
+%  This LaTeX source file is composed for LaTeX2e.
+
+%  The following commands have been added in the SPIE class
+%  file (spie.cls) and will not be understood in other classes:
+%  \supit{}, \authorinfo{}, \skiplinehalf, \keywords{}
+%  The bibliography style file is called spiebib.bst,
+%  which replaces the standard style unstr.bst.
+
+\documentclass[letter]{spie}  %>>> use for US letter paper
+%\documentclass[a4paper]{spie}  %>>> use this instead for A4 paper
+%\documentclass[nocompress]{spie}  %>>> to avoid compression of citations
+% \addtolength{\voffset}{9mm}   %>>> moves text field down
+% \renewcommand{\baselinestretch}{1.65}   %>>> 1.65 for double spacing, 1.25 for 1.5 spacing
+
+%% Latex documents that need direct input
+\input{latex/filesystem/package.tex}        % contains the latex packages
+\input{content/frontmatter.tex}             % contains the Title and Autor info
+\input{latex/filesystem/fileSetup.tex}      % contains package and variables init.
+\input{content/acronym_definition.tex}      % contains the acronims
+\definecolor{dgreen}{rgb}{ 0    0.52    0.25}
+\newcommand{\fullyGuidedColor}{(dark-green)}
+%% Select inputing only one part of the document
+%\includeonly{content/intro/intro}   % the file wihtout .tex
+%\includeonly{content/other/other_content}
+
+% \addbibresource{./content/lit_review.bib}
+% \addbibresource{./content/biblatex-examples.bib}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\acresetall  % reset the acronyms from the title (if any)
+Malignant melanoma is the most dangerous type of skin cancer, yet it is the most treatable kind of cancer, conditioned by its early diagnosis which is a challenging task for clinicians and dermatologists.
+In this regard, CAD systems based on machine learning and image processing techniques are developed to differentiate melanoma lesions from benign and dysplastic nevi using dermoscopic images. 
+Generally, these frameworks are composed of sequential processes: pre-processing, segmentation, and classification. 
+This architecture faces mainly two challenges: (i) each process is complex with the need to tune a set of parameters, and is specific to a given dataset; (ii) the performance of each process depends on the previous one, and the errors are accumulated throughout the framework. 
+In this paper, we propose a framework for melanoma classification based on sparse coding which does not rely on any pre-processing or lesion segmentation.
+Our framework uses Random Forests classifier and sparse representation of three features: SIFT, Hue and Opponent angle histograms, and RGB intensities. 
+The experiments are carried out on the public $PH^{2}$ dataset using a 10-fold cross-validation.
+The results show that SIFT sparse-coded feature achieves the highest performance with sensitivity and specificity of 100\% and 90.3\% respectively, with a dictionary size of 800 atoms and a sparsity level of 2. 
+Furthermore, the descriptor based on RGB intensities achieves similar results with sensitivity and specificity of 100\% and 71.3\%, respectively for a smaller dictionary size of 100 atoms. 
+In conclusion, dictionary learning techniques encode strong structures of dermoscopic images and provide discriminant descriptors.
+\end{abstract}
+
+\keywords{Melanoma, Classification, Sparse coding, Random forests, Dermoscopy}
+
+
+%% Incldue the content without .tex extension
+\acresetall  % reset the acronyms from the abstract
+\include*{content/intro/description} 
+\include*{content/method/method}
+\include*{content/results/experiments}
+\include*{content/results/results}
+\include*{content/conclusion/conclusion}
+         % the file wihtout .tex
+%\include*{content/other/other}
+%
+%\acknowledgments     %>>>> equivalent to \section*{ACKNOWLEDGMENTS}
+%
+%This unnumbered section is used to identify those who have aided the authors in understanding or accomplishing the work presented and to acknowledge sources of funding.
+%
+%\bibliography{./content/lit_review}   %>>>> bibliography data in report.bib
+%\bibliographystyle{spiebib}   %>>>> makes bibtex use spiebib.bst
+
+\end{document}
+

@@ -1,0 +1,26 @@
+% include the figures path relative to the master file
+\graphicspath{ {./content/intro/figures/} }
+
+\section{Description}
+\label{sec:descr}  % \label{} allows reference to this section
+Malignant melanoma is a type of skin cancer and although it accounts for almost 2\% of all skin cancer
+cases, it is the deadliest type causing the vast majority of deaths. 
+The incidence of melanoma has increased in the past decades to currently reach 132,000 melanoma cases, according to the \textit{World Health Organisation}.
+At the same time, however, the patient survival rate significantly has increased, thanks to early diagnosis and treatment of melanoma.
+
+The clinical prognosis of early stage of melanoma is based on the ``ABCDE'' rule, standing for: Asymmetry, irregular Borders, variegated Colors, Diameter greater than \SI{6}{\milli \meter} and Evolving stages of the lesion over time.
+At each clinical routine, these criterion are used to visually inspect skin lesions which are acquired through different imaging techniques such as dermoscopy.
+The similarity between the lesions and the necessity to perform patients follow-up over years makes visual inspection difficult and more prone to errors.
+Thus, \ac{cad} systems based on machine learning and image processing techniques have been proposed to assist the dermatologists and clinicians. 
+The proposed algorithms generally attend to mimic the characteristics of the ``ABCDE'' rule and consist of common steps of pre-processing, segmentation and classification of extracted features. 
+This sequential architecture is complex and each process of the framework is data-driven. 
+
+In this paper, we propose a more general framework which does not need pre-processing and segmentation of the lesions and is based on sparse coded features and \ac{rf} classifier to detect melanoma in dermoscopic images.
+
+
+% Some stuff that emac's colegues use
+%%% Local Variables:
+%%% mode: late
+%%% TeX-master: "../../master.tex"
+%%% End: \section{introduction}
+
