@@ -12,7 +12,10 @@
   \label{fig:qu}
 \end{figure}
 
-
+Figure~\ref{fig:qu} depicts the alignment of the different \ac{pdf}s using the different methods implemented. 
+All the methods seem to address the problem of the \ac{pdf} alignment of the full prostate data.
+However, the Rician normalization seems to outperform the other methods when focusing solely on the \ac{cap} data.
+The \ac{pdf} computed in this specific area is more skewed from its original shape in the case of the linear normalization by parts than with the two other normalization strategies.
 
 \subsection{Quantitative}
 
@@ -25,6 +28,10 @@
   \caption{Spectral evaluation using \ac{pca} decomposition: \protect\subref{fig:qtfull} evaluation considering the full prostate, \protect\subref{fig:qtcap} evaluation considering only the \ac{cap}.}
   \label{fig:qt}
 \end{figure*}
+
+A spectral evaluation is performed by decomposing the set of normalized \ac{pdf}s using \ac{pca} under the assumption that they are linearly dependent. 
+Intuitively, the eigenvalues of the \ac{pca} decomposition are correlated with the alignment of the different \ac{pdf}s.
+Thus, in the case of a perfect alignment,  
 
 %%% Local Variables: 
 %%% mode: latex
