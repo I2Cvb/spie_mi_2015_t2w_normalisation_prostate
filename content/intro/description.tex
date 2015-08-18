@@ -3,40 +3,27 @@
 
 \section{Description}
 \label{sec:descr}  % \label{} allows reference to this 
-The prostate gland is part of men reproductive system and have an inverted pyramidal shape. 
-Figure~\ref{fig:prostate} shows a zonal classification of this organ \cite{mcneal1981zonal}. 
-Based on this classification the gland is divided into three distinct regions:(i)\ac{cz}, (ii)\ac{tz}, and (iii)\ac{pz} where each represent, 20-25\%, 5\% and 70\% of the prostate respectively. 
-In \ac{mri} images, the tissue of \ac{pz} and \ac{tz} are usually merged together as part of the central gland and are difficult to distinguish. 
-\ac{cap} has been reported the second most frequently diagnosed cancer of men accounting for 13.6\% ~\cite{ferlay2010estimates}. 
-In United States, aside from skin cancer, \ac{cap} was considered to be the most commonly diagnosed cancer among men, implying that approximately one in 6 men will be diagnosed with \ac{cap} during their lifetime. 
-\textit{American cancer society} also reported an estimated 233,000 new cases of prostate cancer in 2014~\cite{CancerFactsFigures2014}. 
-\Ac{cap} is most likely to appear in \ac{pz} rather than \ac{tz} and \ac{cz}, respectively. 
-The \ac{cap} diagnosis is usually performed through \ac{psa} control test and \ac{trus} biopsy.
-In \Ac{psa} test, the higher than normal level of \ac{psa} can indicate abnormalities in the prostate. 
-However other factors, such as prostate infection, irritations can lead to a higher level of \ac{psa}.
-After this test, the candidate with higher risk factor are considered for \ac{trus}, where atleast six different samples are taken randomly from the right and left part of the three different zones. 
-Due to the lack of reliability of \ac{psa} test, further investigations using \ac{mri}-\ac{cad} are motivated. 
-{\color{red}maybe one more sentences to advertise \ac{mri}}
-In the past decades, several \ac{cad} systems have been proposed in order to assist the radiologists with their diagnosis. These systems are usually designed as a sequential process consisting of four stages: pre-processing, segmentation, registration and classification.
+
+\Ac{cap} has been reported the second most frequently diagnosed cancer of men accounting for 13.6\%~\cite{ferlay2010estimates}. 
+In United States, aside from skin cancer, \ac{cap} was considered to be the most commonly diagnosed cancer among men, implying that approximately 1 in 6 men will be diagnosed with \ac{cap} during their lifetime.
+The \textit{American cancer society} also reported an estimated 233,000 new cases of prostate cancer in 2014~\cite{CancerFactsFigures2014}. 
+To address these dramatic issues, more systematic screenings are organized through \ac{psa} test with further \ac{trus} biopsy if necessary.
+However, these tests are unreliable or invasive and that is why further investigations using \ac{mri}-\ac{cad} are motivated. 
+In the past decades, several \ac{cad} systems have been proposed in order to assist the radiologists with their diagnosis. 
+These systems are usually designed as a sequential process consisting of four stages: pre-processing, segmentation, registration and classification.
 As a pre-processing steps, image normalization is an important step of the chain. 
-This step is highly crucial in order to achieve a robust classification of segmentation and overcome the inter-patients intensity variations.
-Patient variability is a common and occurrence fact, even using the same scanner, protocol or sequence parameter, hence the main aim of the normalization of the \ac{mri} data is to remove the variability between patients and enforce the repeatability of the \ac{mri} examinations. 
-Few approaches have been proposed in the past to address this issue. 
-Artan~\textit{et.al.}\cite{artan2010prostate,artan2009prostate} and Ozer~\textit{et.al.} proposed to normalize the T2-W images by computing the standard score (i.e. \textit{z-score}) of the pixels of the \ac{pz} as: 
+Normalization is a highly crucial step to overcome the inter-patient intensity variations occurring, enforce the repeatability, and achieve a robust classification~\cite{Lemaitre2015}.
+However, little attention has been dedicated to the problem of normalization of T2W-\ac{mri} prostate images~\cite{Lemaitre2015}.
+Artan\,\textit{et al.}~\cite{artan2010prostate,artan2009prostate} and Ozer\,\textit{et al.}~\cite{ozer2009prostate,ozer2010supervised} proposed to normalize the T2W-\ac{mri} images by computing the standard score (i.e., \textit{z-score}) of the \ac{pz} pixels such as: 
 \begin{equation}
-	I_{s}(x) = \frac{I_{r}(x)- \mu_{pz}}{\sigma_{pz}}, \forall x\in PZ
+  I_{s}(x) = \frac{I_{r}(x) - \mu_{PZ}}{\sigma_{PZ}}, \forall x\in PZ
 \end{equation}
-\noindent Where, $I_{s}(x)$ and $I_{r}(x)$ are the standardized and the raw signal intensity, respectively and $\mu_{PZ}$ and $\sigma_{PZ}$ are the mean and standard deviation of the \ac{pz} signal intensity. 
-This transformation enforces the image \ac{pdf} to have the zero mean and a unit standard deviation.
-Lv ~\textit{et.al.}\cite{lv2009computerized} proposed to transform and match the \ac{pdf} of T2-W image using some statistical landmarks such as median and different quantiles. 
-His method is based on the assumption that \ac{mri} images from the same sequence should share the same \ac{pdf} appearance.
-Viswanath~\textit{et.al.} \cite{viswanath2012central} proposed a variant of the previous method for normalization of the T2-W \ac{mri} images. 
-In their proposed method instead of computing the \ac{pdf} of an entire image, the \ac{pdf} of the largest region in the foreground are computed and aligned in the same manner as \cite{lv2009computerized}.
-
-In this paper, we propose a method based on a Rician \textit{a priori} in order to normalize T2W-MRI prostate images.
-{\color{red} abit more information maybe}
-
-
+\noindent Where, $I_{s}(x)$ and $I_{r}(x)$ are the standardized and the raw signal intensity, respectively, and $\mu_{PZ}$ and $\sigma_{PZ}$ are the mean and standard deviation of the \ac{pz} signal intensity. 
+This transformation enforces the image \ac{pdf} to have a zero mean and a unit standard deviation.
+Lv\,\textit{et al.}~\cite{lv2009computerized} used the method proposed by Nyul\,\textit{et al.}~\cite{nyul2000new}.
+For a given patient, some specific landmarks (i.e., median and different percentiles) of the current \ac{pdf} match the same landmarks learned during a training phase from several patients.
+Viswanath\,\textit{etal.}~\cite{viswanath2012central} used a variant of the previous method by segmenting first the image and keeping only the largest region to build the \ac{pdf}.
+In this paper, we propose a method based on a Rician \textit{a priori} in order to normalize T2W-\ac{mri} prostate images. We emphasize the use of a Rician distribution before to present the methodology allowing to normalize the images. Both qualitative and quantitative results are given and compared with the previous stated methods.
 
 % Some stuff that emac's colegues use
 %%% Local Variables:
