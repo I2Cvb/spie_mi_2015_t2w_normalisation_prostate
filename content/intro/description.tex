@@ -16,7 +16,8 @@ Normalization is a highly crucial step to overcome the inter-patient intensity v
 However, little attention has been dedicated to the problem of normalization of T2W-\ac{mri} prostate images~\cite{Lemaitre2015}.
 Artan\,\textit{et al.}~\cite{artan2010prostate,artan2009prostate} and Ozer\,\textit{et al.}~\cite{ozer2009prostate,ozer2010supervised} proposed to normalize the T2W-\ac{mri} images by computing the standard score (i.e., \textit{z-score}) of the \ac{pz} pixels such as: 
 \begin{equation}
-  I_{s}(x) = \frac{I_{r}(x) - \mu_{PZ}}{\sigma_{PZ}}, \forall x\in PZ
+  I_{s}(x) = \frac{I_{r}(x) - \mu_{PZ}}{\sigma_{PZ}}, \forall x\in PZ 
+  \label{eq:zscore}
 \end{equation}
 \noindent Where, $I_{s}(x)$ and $I_{r}(x)$ are the standardized and the raw signal intensity, respectively, and $\mu_{PZ}$ and $\sigma_{PZ}$ are the mean and standard deviation of the \ac{pz} signal intensity. 
 This transformation enforces the image \ac{pdf} to have a zero mean and a unit standard deviation.
