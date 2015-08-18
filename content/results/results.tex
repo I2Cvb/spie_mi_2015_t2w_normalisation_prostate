@@ -22,16 +22,19 @@ The \ac{pdf} computed in this specific area is more skewed from its original sha
 \begin{figure*}
   \centering
   \subfloat[][]{
-    \label{fig:qtfull}\includegraphics[width=0.45\textwidth]{quantitative_1.png}}\hfill
+    \label{fig:qtfull}\includegraphics[width=0.48\textwidth]{quantitative_1.png}}\hfill
   \subfloat[][]{
-    \label{fig:qtcap}\includegraphics[width=0.45\textwidth]{quantitative_2.png}}
+    \label{fig:qtcap}\includegraphics[width=0.48\textwidth]{quantitative_2.png}}
   \caption{Spectral evaluation using \ac{pca} decomposition: \protect\subref{fig:qtfull} evaluation considering the full prostate, \protect\subref{fig:qtcap} evaluation considering only the \ac{cap}.}
   \label{fig:qt}
 \end{figure*}
 
 A spectral evaluation is performed by decomposing the set of normalized \ac{pdf}s using \ac{pca} under the assumption that they are linearly dependent. 
 Intuitively, the eigenvalues of the \ac{pca} decomposition are correlated with the alignment of the different \ac{pdf}s.
-Thus, in the case of a perfect alignment,  
+Thus, in the case of a perfect alignment of the \ac{pdf}s, the first eigenvalue is much greater than the remaining since that the first eigenvector encodes all the information.
+In the contrary, in the case of a misalignment of the \ac{pdf}s, more eigenvectors are needed to encode the information synonymous with larger eigenvalues.
+Thus, we propose to use the cumulative sum of the normalized eigenvalues as well as the \ac{auc}, as depicted in Fig.\,\ref{fig:qt}.
+Rician normalization outperforms the other methods with an \ac{auc} of $0.9974$ and $0.9824$ considering the full prostate and \ac{cap}, respectively.
 
 %%% Local Variables: 
 %%% mode: latex
