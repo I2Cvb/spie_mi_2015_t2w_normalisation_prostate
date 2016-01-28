@@ -23,7 +23,9 @@
 %     \label{fig:rice-norm-diff}
 % \end{figure}
 
-As stated in~Sect.\,\ref{sec:descr}, proper normalization of the \ac{mri} data during pre-processing is a key problem that has been addressed using parametric and non-parametric strategies.
+\subsection{Normalization using Rician \textit{a priori}}
+
+As stated in~Sect.\,\ref{sec:intro}, proper normalization of the \ac{mri} data during pre-processing is a key problem that has been addressed using parametric and non-parametric strategies.
 We believe that normalizing \ac{mri} data using a parametric model based on a Rician distribution would improve the results for the parametric case.
 Expecting this improvement by changing the data model from the widely used Gaussian distribution to Rician distribution is reasonable. 
 Indeed, Bernstein\,\textit{et al.}~\cite{bernstein1989improved} state that \ac{mri} data theoretically follows a Rayleigh distribution for a low \ac{snr} scenarios while it appears closer to a Gaussian distribution when the \ac{snr} increases.
@@ -46,7 +48,7 @@ It can be highlighted that the Rician model better fits the data than the Gaussi
 The normalization is carried out as: 
 (i) Fit a Rician model to each prostate \ac{pdf} using Least Squares minimization; 
 (ii) Compute the mean (see~Eq.\,\eqref{eq:mean}) and variance (see~Eq.\,\eqref{eq:var}) of the Rician model;
-(iii) Normalize the entire data using the \textit{z-score} similarly as in~Eq.\,\eqref{eq:zscore}\footnote{An alternative normalization method would be included in the final manuscript similarly to inverse transform sampling.}.
+(iii) Normalize the entire data using the \textit{z-score} similarly as in~Eq.\,\eqref{eq:zscore}.
 
 \begin{equation}
   \sigma  \sqrt{\pi/2}\,\,L_{1/2}(-\nu^2/2\sigma^2) 
@@ -58,14 +60,8 @@ The normalization is carried out as:
   \label{eq:var}
 \end{equation}
 
+\subsection{Normalization using generative models in functional data analysis}
 
-% \begin{eqnarray}
-%   &\sigma  \sqrt{\pi/2}\,\,L_{1/2}(-\nu^2/2\sigma^2) \label{eq:mean} \\
-%   &2\sigma^2+\nu^2-\frac{\pi\sigma^2}{2}L_{1/2}^2\left(\frac{-\nu^2}{2\sigma^2}\right) \label{eq:var}
-% \end{eqnarray}
-\section{Contribution}
-
-We propose to tackle the problem of T2W-\ac{mri} prostate image normalization by using the Rician distribution instead of widely used Gaussian distribution. This choice is justified in Sect.\,\ref{sec:method} by analyzing the shape the \ac{pdf}s in the prostate images. Furthermore, we provide a novel manner to assess quantitatively the alignment of the \ac{pdf}s independently of the distribution assumed. 
 
 %%% Local Variables: 
 %%% mode: latex

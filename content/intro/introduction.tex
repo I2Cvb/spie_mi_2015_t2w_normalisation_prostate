@@ -1,0 +1,39 @@
+% include the figures path relative to the master file
+\graphicspath{ {./content/intro/figures/} }
+
+\section{Introduction}
+\label{sec:intro}  % \label{} allows reference to this 
+
+\Ac{cap} has been reported the second most frequently diagnosed cancer of men accounting for 13.6\%~\cite{ferlay2010estimates}. 
+In United States, aside from skin cancer, \ac{cap} was considered to be the most commonly diagnosed cancer among men, implying that approximately 1 in 6 men will be diagnosed with \ac{cap} during their lifetime.
+The \textit{American cancer society} also reported an estimated 233,000 new cases of prostate cancer in 2014~\cite{CancerFactsFigures2014}. 
+To address these dramatic issues, more systematic screenings are organized through \ac{psa} test with further \ac{trus} biopsy if necessary.
+However, these tests are unreliable or invasive and that is why further investigations using \ac{mri}-\ac{cad} are motivated. 
+In the past decades, several \ac{cad} systems have been proposed in order to assist the radiologists with their diagnosis. 
+These systems are usually designed as a sequential process consisting of four stages: pre-processing, segmentation, registration and classification.
+As a pre-processing steps, image normalization is an important step of the chain.
+Normalization is a highly crucial step to overcome the inter-patient intensity variations occurring, enforce the repeatability, and achieve a robust classification~\cite{Lemaitre2015}.
+However, little attention has been dedicated to the problem of normalization of T2W-\ac{mri} prostate images~\cite{Lemaitre2015}.
+
+Artan\,\textit{et al.}~\cite{artan2010prostate,artan2009prostate} and Ozer\,\textit{et al.}~\cite{ozer2009prostate,ozer2010supervised} proposed to normalize the T2W-\ac{mri} images by computing the standard score (i.e., \textit{z-score}) of the \ac{pz} pixels such as: 
+\begin{equation}
+  I_{s}(x) = \frac{I_{r}(x) - \mu_{PZ}}{\sigma_{PZ}}, \forall x\in PZ ,
+  \label{eq:zscore}
+\end{equation}
+\noindent where, $I_{s}(x)$ and $I_{r}(x)$ are the standardized and the raw signal intensity, respectively, and $\mu_{PZ}$ and $\sigma_{PZ}$ are the mean and standard deviation of the \ac{pz} signal intensity. 
+This transformation enforces the image \ac{pdf} to have a zero mean and a unit standard deviation.
+However, this normalization is not appropriate if the \ac{pdf} do not follow a Gaussian distribution as illustrated in Fig.\,\ref{fig:fitting}
+
+Lv\,\textit{et al.}~\cite{lv2009computerized} used the method proposed by Nyul\,\textit{et al.}~\cite{nyul2000new}.
+For a given patient, a warping function is inferred by matching some specific landmarks (i.e., median and different percentiles) of the current \ac{pdf} to the same landmarks learned during a training phase from several patients. 
+The mapping between each landmark is performed using a linear mapping.
+Viswanath\,\textit{et al.}~\cite{viswanath2012central} used a variant of the previous method by segmenting first the image using region growing with a pre-defined homogeneity criterion and keeping only the largest region to build the \ac{pdf}.
+Nevertheless, the warping functions inferred by these methods can suffer from abrupt changes around the landmarks position, leading to a disrupt \ac{pdf} in the normalized image.  
+
+In this paper, we evaluate and compare different normalization approaches in the context of T2W-\ac{mri} prostate images normalization. Our contribution is threefold: (i) a normalization approach based on a Rician \textit{a priori}; (ii) a normalization approach based on a method used in registration of functional data; (iii) a novel evaluation metric to asses quantitatively the alignment of the \acp{pdf} independently of the assumed distribution. 
+These methods will be compared qualitatively and quantitatively, with both \textit{z-score} normalization and linear piecewise-linear normalization.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End:
