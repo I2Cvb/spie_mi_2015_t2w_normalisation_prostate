@@ -54,7 +54,7 @@ The normalization is carried out as:
   \sigma  \sqrt{\pi/2}\,\,L_{1/2}(-\nu^2/2\sigma^2) 
   \label{eq:mean}
 \end{equation}
-\vspace{-.4cm}
+
 \begin{equation}
   2\sigma^2+\nu^2-\frac{\pi\sigma^2}{2}L_{1/2}^2\left(\frac{-\nu^2}{2\sigma^2}\right) 
   \label{eq:var}
@@ -62,6 +62,58 @@ The normalization is carried out as:
 
 \subsection{Normalization using generative models in functional data analysis}
 
+Srivastava\,\textit{et al.} proposed a function registration framework which do not rely on any model regarding the functions themselves.
+
+\subsubsection{\acl*{srsf} transform}
+
+The function registration is performed in a subspace using the \ac{srsf}. The \ac{srsf} of a function $f$ is defined as:
+
+\begin{equation}
+  q(t) = \sign(\dot{f}(t))\sqrt{|\dot{f}(t)|} \ .
+  \label{eq:srsf}
+\end{equation}
+
+The function $f$ can be warped by a warping function $\gamma$, denoted $f \circ \gamma$ and can be expressed as in Eq.\,\ref{eq:warp} using the \ac{srsf}.
+
+\begin{equation}
+  \tilde{q}(t) = (q(t) \circ \gamma) \sqrt{\dot{\gamma}} \ .
+  \label{eq:warp}
+\end{equation}
+
+Using these properties, a cost function can be defined and used inside the framework to align the different functions.
+
+\subsubsection{Cost function}
+
+The cost function used in the registration framework is expressed as in Eq.\,\ref{eq:cf}
+
+\begin{equation}
+  D_y(f_1, f_2) = \underset{\gamma \in \Gamma}{\infspie} \| q_1 - (q_2 \circ \gamma) \sqrt{\dot{\gamma}} \| \ .
+  \label{eq:cf}
+\end{equation}
+
+\subsubsection{Alignment}
+
+The alignment framework consists in the following steps:
+
+\begin{itemize}
+  \item Compute $u_f$ as in Eq.\,\ref{eq:mean};
+  \item For each function $f_i$, iteratively
+    \begin{itemize}
+      \item Compute $\gamma_{i}^{*}$ as in Eq.\,\ref{eq:warpi};
+      \item Compute $\tilde{q}_i$ as in Eq.\,\ref{eq:warp};
+      \item Update $\mu_f$ using the function $\tilde{q}_i$.
+    \end{itemize}
+\end{itemize}
+
+\begin{equation}
+  \mu_f = \argmin_{f \in \mathcal{F}} \sum_{i = 1}^{n} D_y(f, f_i)^2 \ .
+  \label{eq:mean}
+\end{equation}
+
+\begin{equation}
+  \gamma_{i}^{*} = \argmin_{f \in \mathcal{F}} \sum_{i = 1}^{n} D_y(\mu_f, f_i)^2 \ .
+  \label{eq:warpi}
+\end{equation}
 
 %%% Local Variables: 
 %%% mode: latex
