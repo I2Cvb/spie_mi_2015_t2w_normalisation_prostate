@@ -62,18 +62,9 @@ The normalization is carried out as:
 
 \subsection{Normalization using generative models in functional data analysis}
 
-Srivastava\,\textit{et al.}\cite{Srivastava2011} proposed a generic method to register functional data, without any assumption regarding the models of the different functions. This framework (see Sect.\,\ref{sec:regdra}) relies on the the \ac{srsf} (see Sect.\,\ref{sec:srsf}) representation which transform the Fisher-Rao metric into the conventional $\mathbb{L}^2$ metric, and thus allows to define a cost function corresponding to an Euclidean distance between two functions in this new representation.
+Srivastava\,\textit{et al.}~\cite{Srivastava2011} proposed a generic method to register functional data, without any assumption regarding the models of different functions. This framework (see Sect.\,\ref{sec:regfra}) relies on the the \ac{srsf} representation (see Sect.\,\ref{sec:srsf}) which transform the Fisher-Rao metric into the conventional $\mathbb{L}^2$ metric, and thus allows to define a cost function corresponding to an Euclidean distance between two functions in this new representation.
 
 \subsubsection{\acl*{srsf} representation} \label{sec:srsf}
-
-\Ac{srsf} representation is used to transform the functions and register them into this space. The \ac{srsf} of a function $f$ is defined as:
-
-\begin{equation}
-  q(t) = \sign(\dot{f}(t))\sqrt{|\dot{f}(t)|} \ ,
-  \label{eq:srsf}
-\end{equation}
-
-\noindent where $\dot{f}(t)$ corresponds to the derivative of $f$.
 
 In the proposed registration framework of functional data, two function $f_1$ and $f_2$ are registered by composing $f_2$ with a warping function $\gamma$ such that:
 
@@ -82,7 +73,16 @@ In the proposed registration framework of functional data, two function $f_1$ an
   \label{eq:regfun}
 \end{equation}
 
-\noindent where $D_{FR}$ is the Fisher-Rao distance. 
+\noindent where $D_{FR}$ is the Fisher-Rao distance.
+
+The \Ac{srsf} representation is used to transform the functions and register them into this space. The \ac{srsf} of a function $f$ is defined as:
+
+\begin{equation}
+  q(t) = \sign(\dot{f}(t))\sqrt{|\dot{f}(t)|} \ ,
+  \label{eq:srsf}
+\end{equation}
+
+\noindent where $\dot{f}(t)$ corresponds to the derivative of $f$.
 
 The major property of the \ac{srsf} representation used in the registration framework is the following: the composition of a function $f$ with a warping function $\gamma$ (i.e., $f \circ \gamma$) is equivalent to Eq.\,\ref{eq:warp}, using the \ac{srsf} representation.
 
@@ -102,27 +102,26 @@ Using this property, a cost function is defined to measure the similarity betwee
 
 \subsubsection{Registration framework}\label{sec:regfra}
 
-The alignment framework consists in the following steps:
-
-\begin{itemize}
-  \item Compute $u_f$ as in Eq.\,\ref{eq:mean};
-  \item For each function $f_i$, iteratively
-    \begin{itemize}
-      \item Compute $\gamma_{i}^{*}$ as in Eq.\,\ref{eq:warpi};
-      \item Compute $\tilde{q}_i$ as in Eq.\,\ref{eq:warp};
-      \item Update $\mu_f$ using the function $\tilde{q}_i$.
-    \end{itemize}
-\end{itemize}
+The registration framework consists into two steps. First, an initialization in which the Karcher mean $\mu_f$ is computed as in Eq.\,\ref{eq:mean}
 
 \begin{equation}
   \mu_f = \argmin_{f \in \mathcal{F}} \sum_{i = 1}^{n} D_y(f, f_i)^2 \ .
   \label{eq:mean}
 \end{equation}
 
+Then, for each function $f_i$
+\begin{itemize}
+\item Compute $\gamma_{i}^{*}$ as in Eq.\,\ref{eq:warpi};
+\item Compute $\tilde{q}_i$ as in Eq.\,\ref{eq:warp};
+\item Update $\mu_f$ as in Eq.\,\ref{eq:mean} by replacing $f_i$ by $\tilde{f_i}$, using $\tilde{q}_i$.
+\end{itemize}
+
 \begin{equation}
-  \gamma_{i}^{*} = \argmin_{f \in \mathcal{F}} \sum_{i = 1}^{n} D_y(\mu_f, f_i)^2 \ .
+  \gamma_{i}^{*} = \argmin_{\gamma \in \Gamma} \sum_{i = 1}^{n} D_y(\mu_f, f_i)^2 \ .
   \label{eq:warpi}
 \end{equation}
+
+This step is iteratively performed based on the gradient of the cost function given in Eq.\,\ref{eq:mean}. We refer the reader to the work of Srivastava\,\textit{et al.}~\cite{Srivastava2011} for more detailed discussion.
 
 %%% Local Variables: 
 %%% mode: latex
