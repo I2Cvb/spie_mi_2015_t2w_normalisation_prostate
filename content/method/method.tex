@@ -109,12 +109,10 @@ The registration framework consists into two steps. First, an initialization in 
   \label{eq:mean}
 \end{equation}
 
-Then, for each function $f_i$
-\begin{itemize}
-\item Compute $\gamma_{i}^{*}$ as in Eq.\,\ref{eq:warpi};
-\item Compute $\tilde{q}_i$ as in Eq.\,\ref{eq:warp};
-\item Update $\mu_f$ as in Eq.\,\ref{eq:mean} by replacing $f_i$ by $\tilde{f_i}$, using $\tilde{q}_i$.
-\end{itemize}
+Then, for each function $f_i$: 
+(i) compute $\gamma_{i}^{*}$ as in Eq.\,\ref{eq:warpi}; 
+(ii) compute $\tilde{q}_i$ as in Eq.\,\ref{eq:warp};
+(iii) update $\mu_f$ as in Eq.\,\ref{eq:mean} by replacing $f_i$ by $\tilde{f_i}$, using $\tilde{q}_i$.
 
 \begin{equation}
   \gamma_{i}^{*} = \argmin_{\gamma \in \Gamma} \sum_{i = 1}^{n} D_y(\mu_f, f_i)^2 \ .
