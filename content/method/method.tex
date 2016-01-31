@@ -36,11 +36,11 @@ It can be highlighted that the Rician model better fits the data than the Gaussi
 \begin{figure*}
   \centering
   \subfloat[][]{
-    \label{fig:p1}\includegraphics[width=0.25\textwidth]{03}}\hfill
+    \label{fig:p1}\includegraphics[width=0.48\textwidth]{03}}\hfill
   \subfloat[][]{
-    \label{fig:p2}\includegraphics[width=0.25\textwidth]{06}}\hfill
-  \subfloat[][]{
-    \label{fig:p3}\includegraphics[width=0.25\textwidth]{14}}
+    \label{fig:p2}\includegraphics[width=0.48\textwidth]{06}}\hfill
+%  \subfloat[][]{
+%    \label{fig:p3}\includegraphics[width=0.3\textwidth]{14}}
   \caption{Visual evaluation of the goodness of fitting using Rician and Gaussian distribution.}
   \label{fig:fitting}
 \end{figure*}
@@ -62,36 +62,45 @@ The normalization is carried out as:
 
 \subsection{Normalization using generative models in functional data analysis}
 
-Srivastava\,\textit{et al.} proposed a function registration framework which do not rely on any model regarding the functions themselves.
+Srivastava\,\textit{et al.}\cite{Srivastava2011} proposed a generic method to register functional data, without any assumption regarding the models of the different functions. This framework (see Sect.\,\ref{sec:regdra}) relies on the the \ac{srsf} (see Sect.\,\ref{sec:srsf}) representation which transform the Fisher-Rao metric into the conventional $\mathbb{L}^2$ metric, and thus allows to define a cost function corresponding to an Euclidean distance between two functions in this new representation.
 
-\subsubsection{\acl*{srsf} transform}
+\subsubsection{\acl*{srsf} representation} \label{sec:srsf}
 
-The function registration is performed in a subspace using the \ac{srsf}. The \ac{srsf} of a function $f$ is defined as:
+\Ac{srsf} representation is used to transform the functions and register them into this space. The \ac{srsf} of a function $f$ is defined as:
 
 \begin{equation}
-  q(t) = \sign(\dot{f}(t))\sqrt{|\dot{f}(t)|} \ .
+  q(t) = \sign(\dot{f}(t))\sqrt{|\dot{f}(t)|} \ ,
   \label{eq:srsf}
 \end{equation}
 
-The function $f$ can be warped by a warping function $\gamma$, denoted $f \circ \gamma$ and can be expressed as in Eq.\,\ref{eq:warp} using the \ac{srsf}.
+\noindent where $\dot{f}(t)$ corresponds to the derivative of $f$.
+
+In the proposed registration framework of functional data, two function $f_1$ and $f_2$ are registered by composing $f_2$ with a warping function $\gamma$ such that:
 
 \begin{equation}
-  \tilde{q}(t) = (q(t) \circ \gamma) \sqrt{\dot{\gamma}} \ .
+  \argmin_{\gamma \in \Gamma} D_{FR}(f_1, (f_2 \circ \gamma)) \ ,
+  \label{eq:regfun}
+\end{equation}
+
+\noindent where $D_{FR}$ is the Fisher-Rao distance. 
+
+The major property of the \ac{srsf} representation used in the registration framework is the following: the composition of a function $f$ with a warping function $\gamma$ (i.e., $f \circ \gamma$) is equivalent to Eq.\,\ref{eq:warp}, using the \ac{srsf} representation.
+
+\begin{equation}
+  \tilde{q}(t) = (q(t) \circ \gamma) \sqrt{\dot{\gamma}} \ ,
   \label{eq:warp}
 \end{equation}
 
-Using these properties, a cost function can be defined and used inside the framework to align the different functions.
+\noindent where $\dot{\gamma}$ is the derivative of $\gamma$.
 
-\subsubsection{Cost function}
-
-The cost function used in the registration framework is expressed as in Eq.\,\ref{eq:cf}
+Using this property, a cost function is defined to measure the similarity between two functions $f_1$ and $f_2$, expressed as in Eq.\,\ref{eq:cf}
 
 \begin{equation}
   D_y(f_1, f_2) = \underset{\gamma \in \Gamma}{\infspie} \| q_1 - (q_2 \circ \gamma) \sqrt{\dot{\gamma}} \| \ .
   \label{eq:cf}
 \end{equation}
 
-\subsubsection{Alignment}
+\subsubsection{Registration framework}\label{sec:regfra}
 
 The alignment framework consists in the following steps:
 
