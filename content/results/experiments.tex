@@ -3,7 +3,7 @@
 
 \subsection{Data}
 
-The experiments are conducted on a subset of public multi-parametric \ac{mri} prostate publicly available dataset~\footnote{\url{http://visor.udg.edu/i2cvb/}}~\cite{lemaitre2015boosting}.
+The experiments are conducted on a subset of public multi-parametric \ac{mri} prostate publicly available dataset\footnote{\url{http://visor.udg.edu/i2cvb/}}~\cite{lemaitre2015boosting}.
 This dataset was acquired from a cohort of patients with higher-than-normal level of \ac{psa}. 
 The acquisition was performed using a 3T whole body \ac{mri} scanner (Siemens Magnetom Trio TIM, Erlangen, Germany) using sequences to obtain T2W-\ac{mri}. 
 Aside of the \ac{mri} examinations, these patients also underwent a guided-biopsy. 
@@ -13,11 +13,11 @@ The prostate organ as well as the prostate zones (i.e., \ac{pz}, \ac{cg}) and \a
 
 \subsection{Implementation}
 
-The different normalization methods are implemented in Python and publicly available in GitHub~\footnote{\url{https://github.com/glemaitre/protoclass}}.
-The normalization based on \ac{srsf} uses the implementation~\footnote{\url{https://bitbucket.org/tetonedge/fdasrsf}} of Tucker\,\textit{et al.}~\cite{Tucker2013}.
+The different normalization methods are implemented in Python and publicly available in GitHub\footnote{\url{https://github.com/glemaitre/protoclass}}.
+The normalization based on \ac{srsf} uses the implementation\footnote{\url{https://bitbucket.org/tetonedge/fdasrsf}} of Tucker\,\textit{et al.}~\cite{Tucker2013}.
 
 \subsection{Parameters}
 
-The model fitting for the Gaussian and Rician normalization was performed as a non-linear least squares problems, using Levenberg-Marquardt optimization.
-The piecewise-linear normalization was performed using the following set of percentiles $s \in \{0, 5, 25, 50, 75, 95, 100 \}$ as landmarks.
+The model fitting for the Gaussian and Rician normalization is performed as a non-linear least squares problem, using Levenberg-Marquardt optimization.
+The piecewise-linear normalization is performed using the following set of percentiles $s \in \{0, 5, 25, 50, 75, 95, 100 \}$ as landmarks.
 In the \ac{srsf}-based normalization, the \acp{pdf} are smoothed using spline-based denoising method.

@@ -46,23 +46,26 @@ It can be highlighted that the Rician model better fits the data than the Gaussi
 \end{figure*}
 
 The normalization is carried out as: 
-(i) Fit a Rician model to each prostate \ac{pdf} using Least Squares minimization; 
-(ii) Compute the mean (see~Eq.\,\eqref{eq:mean}) and variance (see~Eq.\,\eqref{eq:var}) of the Rician model;
-(iii) Normalize the entire data using the \textit{z-score} similarly as in~Eq.\,\eqref{eq:zscore}.
+(i) fit a Rician model to each prostate \ac{pdf} using non-linear least squares minimization; 
+(ii) compute the mean (see~Eq.\,\eqref{eq:meanr}) and variance (see~Eq.\,\eqref{eq:var}) of the Rician model;
+(iii) normalize the entire data using the \textit{z-score} similarly as in~Eq.\,\eqref{eq:zscore}.
 
 \begin{equation}
-  \sigma  \sqrt{\pi/2}\,\,L_{1/2}(-\nu^2/2\sigma^2) 
-  \label{eq:mean}
+  \mu_{r} = \sigma  \sqrt{\frac{\pi}{2}}\,\,L_{1/2}(-\frac{\nu^2}{2\sigma^2})  \ ,
+  \label{eq:meanr}
 \end{equation}
 
 \begin{equation}
-  2\sigma^2+\nu^2-\frac{\pi\sigma^2}{2}L_{1/2}^2\left(\frac{-\nu^2}{2\sigma^2}\right) 
+  \sigma_{r} = 2\sigma^2+\nu^2-\frac{\pi\sigma^2}{2}L_{1/2}^2\left(\frac{-\nu^2}{2\sigma^2}\right)  \ ,
   \label{eq:var}
 \end{equation}
 
+\noindent where $\nu$ and $\sigma$ are the distance between the reference point and the center of the bivariate distribution and the scale, respectively; $L_{1/2}$ denotes a Laguerre polynomial.
+
 \subsection{Normalization using generative models in functional data analysis}
 
-Srivastava\,\textit{et al.}~\cite{Srivastava2011} proposed a generic method to register functional data, without any assumption regarding the models of different functions. This framework (see Sect.\,\ref{sec:regfra}) relies on the the \ac{srsf} representation (see Sect.\,\ref{sec:srsf}) which transform the Fisher-Rao metric into the conventional $\mathbb{L}^2$ metric, and thus allows to define a cost function corresponding to an Euclidean distance between two functions in this new representation.
+Srivastava\,\textit{et al.}~\cite{Srivastava2011} have proposed a generic method to register functional data, without any assumption regarding the models of different functions. 
+This framework (see Sect.\,\ref{sec:regfra}) relies on the \ac{srsf} representation (see Sect.\,\ref{sec:srsf}) which transforms the Fisher-Rao metric into the conventional $\mathbb{L}^2$ metric, and thus allows to define a cost function corresponding to an Euclidean distance between two functions in this new representation.
 
 \subsubsection{\acl*{srsf} representation} \label{sec:srsf}
 
@@ -73,7 +76,7 @@ In the proposed registration framework of functional data, two function $f_1$ an
   \label{eq:regfun}
 \end{equation}
 
-\noindent where $D_{FR}$ is the Fisher-Rao distance.
+\noindent where $D_{FR}$ is the Fisher-Rao distance and $\Gamma$ is the set of all the functions $\gamma$.
 
 The \Ac{srsf} representation is used to transform the functions and register them into this space. The \ac{srsf} of a function $f$ is defined as:
 
@@ -84,7 +87,7 @@ The \Ac{srsf} representation is used to transform the functions and register the
 
 \noindent where $\dot{f}(t)$ corresponds to the derivative of $f$.
 
-The major property of the \ac{srsf} representation used in the registration framework is the following: the composition of a function $f$ with a warping function $\gamma$ (i.e., $f \circ \gamma$) is equivalent to Eq.\,\ref{eq:warp}, using the \ac{srsf} representation.
+The major property of the \ac{srsf} representation used in the registration framework is the following: the composition of a function $f$ with a warping function $\gamma$ (i.e., $f \circ \gamma$) is equivalent to Eq.\,\eqref{eq:warp}, using the \ac{srsf} representation.
 
 \begin{equation}
   \tilde{q}(t) = (q(t) \circ \gamma) \sqrt{\dot{\gamma}} \ ,
@@ -93,7 +96,7 @@ The major property of the \ac{srsf} representation used in the registration fram
 
 \noindent where $\dot{\gamma}$ is the derivative of $\gamma$.
 
-Using this property, a cost function is defined to measure the similarity between two functions $f_1$ and $f_2$, expressed as in Eq.\,\ref{eq:cf}
+Using this property, a cost function (named amplitude or $y$-distance) is defined to measure the similarity between two functions $f_1$ and $f_2$, expressed as in Eq.\,\eqref{eq:cf}
 
 \begin{equation}
   D_y(f_1, f_2) = \underset{\gamma \in \Gamma}{\infspie} \| q_1 - (q_2 \circ \gamma) \sqrt{\dot{\gamma}} \| \ .
@@ -102,7 +105,7 @@ Using this property, a cost function is defined to measure the similarity betwee
 
 \subsubsection{Registration framework}\label{sec:regfra}
 
-The registration framework consists into two steps. First, an initialization in which the Karcher mean $\mu_f$ is computed as in Eq.\,\ref{eq:mean}
+The registration framework consists into two steps. First, an initialization in which the Karcher mean $\mu_f$ is computed as in Eq.\,\eqref{eq:mean}
 
 \begin{equation}
   \mu_f = \argmin_{f \in \mathcal{F}} \sum_{i = 1}^{n} D_y(f, f_i)^2 \ .
@@ -110,16 +113,18 @@ The registration framework consists into two steps. First, an initialization in 
 \end{equation}
 
 Then, for each function $f_i$: 
-(i) compute $\gamma_{i}^{*}$ as in Eq.\,\ref{eq:warpi}; 
-(ii) compute $\tilde{q}_i$ as in Eq.\,\ref{eq:warp};
-(iii) update $\mu_f$ as in Eq.\,\ref{eq:mean} by replacing $f_i$ by $\tilde{f_i}$, using $\tilde{q}_i$.
+(i) compute $\gamma_{i}^{*}$ as in Eq.\,\eqref{eq:warpi}; 
+(ii) compute $\tilde{q}_i$ as in Eq.\,\eqref{eq:warp};
+(iii) update $\mu_f$ as in Eq.\,\eqref{eq:mean} by replacing $f_i$ by $\tilde{f_i}$, using $\tilde{q}_i$.
 
 \begin{equation}
-  \gamma_{i}^{*} = \argmin_{\gamma \in \Gamma} \sum_{i = 1}^{n} D_y(\mu_f, f_i)^2 \ .
+  \gamma_{i}^{*} = \argmin_{\gamma \in \Gamma} \sum_{i = 1}^{n} D_y(\mu_f, f_i)^2 \ ,
   \label{eq:warpi}
 \end{equation}
 
-This step is iteratively performed based on the gradient of the cost function given in Eq.\,\ref{eq:mean}. We refer the reader to the work of Srivastava\,\textit{et al.}~\cite{Srivastava2011} for more detailed discussion.
+\noindent where $n$ is the total number of functions to be aligned.
+
+This step is iteratively performed based on the gradient of the cost function given in Eq.\,\eqref{eq:mean}. We refer the reader to the work of Srivastava\,\textit{et al.}~\cite{Srivastava2011} for more detailed discussion.
 
 %%% Local Variables: 
 %%% mode: latex
